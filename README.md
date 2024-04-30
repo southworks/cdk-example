@@ -45,7 +45,7 @@ Suppose we want to create a CDK App with only one stack, which would be the CDK 
 
 This will create a new stack in your AWS account. Like this one:
 
-![alt text](image.png)
+![alt text](./screenshots/image.png)
 
 Now that we have bootstrapped our environment in AWS where we want to deploy our CDK App, we can initiate a new CDK App in a local directory. Create a new directory in your File Explorer, and run this command:
 * `cdk init sample-app --language typescript`
@@ -54,7 +54,7 @@ Here instead of typescript, AWS CDK is generally available in these languages al
 
 The project structure would look something like this:
 
-![alt text](image-1.png)
+![alt text](./screenshots/image-1.png)
 
 * lib/cdk-test-stack.ts is where your CDK application’s main stack is defined. This is the file we’ll be spending most of our time in.
 * bin/cdk-test.ts is the entrypoint of the CDK application. It will load the stack defined in lib/cdk-workshop-stack.ts.
@@ -119,9 +119,9 @@ Once both files are ready and all the resources you want to be deployed in that 
 
 The CDK will start the deployment and you shall see a new stack created in the AWS account once the deployment has finished. In this case, we created also a CodeCommit repository to work on, so this repo should also be created
 
-![alt text](image-2.png)
+![alt text](./screenshots/image-2.png)
 
-![alt text](image-3.png)
+![alt text](./screenshots/image-3.png)
 
 Now we have our Stack deployed and created in our AWS environment. This Stack consists mainly of 2 resources: a CodePipeline and a CodeCommit Repository. Now, we will add to our CDK App, a new Stack, consisting of the App stack, the app that will be deployed through the CodePipeline. As I said earlier, stacks can also be grouped into stages. So, we will add a new stage to the pipeline, and that stage will consist of a stack containing all the necessary resources for our App. In this case, as an example, we will deploy a stack with a Lambda Function and an S3 Bucket in it. We will also create and assign to the S3 Bucket an S3 Event Notification, so when an object is created in the Bucket, it will trigger the Lamda Function. In order for the Bucket to be able to trigger the Lambda, we will configure the Lambda Function with a Lambda Permission Policy.
 
@@ -228,11 +228,11 @@ export class CdkExampleStack extends cdk.Stack {
 
 Now, since we already ran the cdk deploy command and as a result we have our CodeCommit Repository deployed and created into our AWS environment, we push these CDK App changes into the CDK-Repo . This will automatically trigger the CodePipeline we also have already deployed and created in our AWS environment, and all the stages of the pipeline will run. When the pipeline is done, you should see your new App Stack created, along with the Lambda Function and S3 Bucket resources within it (or any other resource/s you declare within your stack):
 
-![alt text](image-4.png)
+![alt text](./screenshots/image-4.png)
 
 And here it is the Event Notification for the S3 Bucket:
 
-![alt text](image-6.png)
+![alt text](./screenshots/image-6.png)
 
 ## Delete Stack
 
